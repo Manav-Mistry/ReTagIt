@@ -1,5 +1,8 @@
 import React from "react";
 import { useState } from "react";
+import { register } from "../features/auth/authSlice";
+import {useSelector, useDispatch} from 'react-redux'
+import { toast } from "react-toastify";
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -11,6 +14,10 @@ function Register() {
 
   const { name, email, password, password2 } = formData;
 
+  const dispatch = useDispatch()
+
+  const {user, isError, isLoading, isSuccess, message} = useSelector((state) => state.auth)
+
   const onChange = (e) => {
     setFormData((prev) => ({
       ...prev,
@@ -20,12 +27,27 @@ function Register() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(name, email, password, password2);
+    // console.log(name, email, password, password2);
+
+    if(password != password2) {
+      toast.error("Passwords are not matching", {
+        position: toast.POSITION.TOP_CENTER,
+        theme: "dark"
+      })
+    } else {
+        const userData = {
+          name,
+          email,
+          password
+        }
+        dispatch(register(userData))
+    }
+
   };
 
   return (
     <div className="container">
-      <div className="header"></div>
+      <div className="header"> {user} </div>
 
       <div className="form" >
         <div className="form-group">
