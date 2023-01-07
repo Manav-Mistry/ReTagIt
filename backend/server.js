@@ -2,6 +2,7 @@ const express = require("express")
 const dotenv = require("dotenv").config()
 const PORT = process.env.PORT || 5000
 const cors = require("cors")
+const {errorHandler} = require("./middleware/errorHandler")
 // const morgan = require('morgan');
 const connectDB = require("./config/db")
 
@@ -16,4 +17,5 @@ app.use(express.urlencoded({extended: false}))
 
 app.use("/api/users", require("./routes/userRoutes"))
 
+app.use(errorHandler)
 app.listen(PORT, () => "server started...")

@@ -1,8 +1,9 @@
 import React from "react";
-import { useState } from "react";
-import { register } from "../features/auth/authSlice";
-import {useSelector, useDispatch} from 'react-redux'
+import { useState, useEffect } from "react";
+import { register, reset } from "../features/auth/authSlice";
+import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -14,9 +15,29 @@ function Register() {
 
   const { name, email, password, password2 } = formData;
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const {user, isError, isLoading, isSuccess, message} = useSelector((state) => state.auth)
+  const { user, isError, isLoading, isSuccess, message } = useSelector(
+    (state) => state.auth
+  );
+
+  useEffect(() => {
+    if(isError) {
+      toast.error(message, {
+        position: toast.POSITION.TOP_CENTER,
+        theme: "light",
+      })
+    }
+
+    if(isSuccess || user) {
+      // redirect to home
+      navigate("/")
+    }
+
+    dispatch(reset())
+
+  }, [isError, isSuccess, message, user, navigate, dispatch]) 
 
   const onChange = (e) => {
     setFormData((prev) => ({
@@ -29,27 +50,26 @@ function Register() {
     e.preventDefault();
     // console.log(name, email, password, password2);
 
-    if(password != password2) {
+    if (password !== password2) {
       toast.error("Passwords are not matching", {
         position: toast.POSITION.TOP_CENTER,
-        theme: "dark"
-      })
+        theme: "dark",
+      });
     } else {
-        const userData = {
-          name,
-          email,
-          password
-        }
-        dispatch(register(userData))
+      const userData = {
+        name,
+        email,
+        password,
+      };
+      dispatch(register(userData));
     }
-
   };
 
   return (
     <div className="container">
       <div className="header"> {user} </div>
 
-      <div className="form" >
+      <div className="form">
         <div className="form-group">
           <form onSubmit={onSubmit}>
             {/* name */}
