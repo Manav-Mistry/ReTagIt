@@ -1,6 +1,7 @@
 import React from 'react'
-import { useState } from "react";
-import { login } from "../features/auth/authSlice";
+import { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
+import { login, reset } from "../features/auth/authSlice";
 import {useSelector, useDispatch} from 'react-redux'
 import { toast } from "react-toastify";
 
@@ -14,8 +15,25 @@ function Login() {
   const { email, password } = formData;
 
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const {user, isError, isLoading, isSuccess, message} = useSelector((state) => state.auth)
+
+  // useEffect
+  useEffect(() => {
+    if(isError) {
+      toast.error(message, {
+        position: toast.POSITION.TOP_CENTER,
+        theme: "light",
+      })
+    }
+
+    if(isSuccess || user) {
+      navigate("/")
+    }
+
+    dispatch(reset())
+  }, [isSuccess, isError, message, navigate, user, dispatch])
 
   const onChange = (e) => {
     setFormData((prev) => ({
@@ -37,7 +55,7 @@ function Login() {
 
   return (
     <div className="container">
-      <div className="header"> {user} </div>
+      {/* <div className="header"> {user} </div> */}
 
       <div className="form" >
         <div className="form-group">

@@ -24,6 +24,7 @@ function Register() {
 
   useEffect(() => {
     if(isError) {
+      console.log("errror");
       toast.error(message, {
         position: toast.POSITION.TOP_CENTER,
         theme: "light",
