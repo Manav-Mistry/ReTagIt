@@ -24,6 +24,7 @@ function Home() {
       {user 
         ? (
           <>
+            Hello {user.name}
             <button onClick={logoutUser}>Logout</button>
           </>
         )
