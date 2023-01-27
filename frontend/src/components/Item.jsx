@@ -1,4 +1,7 @@
 import React from 'react'
+import Currency from 'react-currency-icons'
+
+
 import "../style/item.css"
 
 function Item({imgName}) {
@@ -6,6 +9,10 @@ function Item({imgName}) {
     <div className='item'>
         <div className="item-img-container">
             <img className='item-image' src={require(`../img/${imgName}`)} alt="" />
+            <div className="inr-currency">
+              
+              <Currency code="INR" size="small" />
+            </div>
         </div>
         <div className='about-item'>
             <div className='item-price'>1000</div>

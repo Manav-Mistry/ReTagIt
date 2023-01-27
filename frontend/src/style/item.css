@@ -16,6 +16,13 @@
 }
 .item-img-container{
     text-align: center;
+    position: relative;
+}
+
+.inr-currency {
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 .item-image {
     height: 200px;
