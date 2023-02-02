@@ -7,6 +7,7 @@ import {ToastContainer} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 
 import './App.css';
+import AddItem from './pages/form/AddItem';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
+            <Route path='/addItem' element={<AddItem />} />
         </Routes>
     </Router>
     <ToastContainer />
