@@ -1,6 +1,9 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { addItem } from "../../features/Items/itemSlice"
 
 function AddItem() {
   const [formData, setFormData] = useState({
@@ -13,29 +16,60 @@ function AddItem() {
     neighbourhood: "",
   });
 
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  // useselector
+  const {isError, isLoading, isSuccess, message} = useSelector( (state) => state.item )
+
+  
+  useEffect(() => {
+    if(isError) {
+      console.log("errror");
+      toast.error(message, {
+        position: toast.POSITION.TOP_CENTER,
+        theme: "light",
+      })
+    }
+     
+    // FIXME: check, after the navigation toast will work or not 
+    if(isSuccess) {
+      // redirect to home
+      navigate("/")
+      toast.success(message, {
+        position: toast.POSITION.TOP_CENTER,
+        theme: "light",
+      })
+    }
+
+    // TODO: create reset reducer in itemSlice
+    // dispatch(reset())
+
+  }, [isError, isSuccess, message, navigate, dispatch]) 
+
+
   const {title, category, description, price, state, city, neighbourhood} = formData;
 
   const onChange = (e) => {
-    console.log(e.target.name, e.target.value)
+    // console.log(e.target.value)
     setFormData((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value.trim(),
     }));
-  };
+  }
+
+  const onChangeSelectionList = (e) => {
+    console.log(e.target.value)
+    setFormData((prev) => ({
+      ...prev,
+      ["category"]: e.target.value,
+    }));
+  }
 
   const onSubmit = (e) => {
     e.preventDefault();
     // console.log(name, email, password, password2);
-    const itemData = {
-        title,
-        category,
-        description,
-        price,
-        state,
-        city,
-        neighbourhood,
-    };
-
+    
     if (
       title == "" ||
       category == "" ||
@@ -44,16 +78,25 @@ function AddItem() {
       state == "" ||
       city == "" ||
       neighbourhood == ""
-    ) {
-    //   toast.error("Please fill all the fields", {
-    //     position: toast.POSITION.TOP_CENTER,
-    //     theme: "dark",
-    //   });
-    console.log(itemData);
-    } else {
-      
+      ) {
+        toast.error("Please fill all the fields", {
+          position: toast.POSITION.TOP_CENTER,
+          theme: "dark",
+        });
+        // console.log(itemData);
+      } else {
+        const itemData = {
+            title,
+            category,
+            description,
+            price,
+            state,
+            city,
+            neighbourhood,
+        };
+        
       console.log(itemData);
-      // dispatch(register(userData));
+      dispatch(addItem(itemData));
     }
   };
   return (
@@ -74,7 +117,7 @@ function AddItem() {
             />
 
             {/* category */}
-            <select className="form-select" aria-label="Default select example" onChange={onChange}>
+            <select className="form-select" aria-label="Default select example" onChange={onChangeSelectionList}>
                 <option name="category" value="1">One</option>
                 <option name="category" value="2">Two</option>
                 <option name="category" value="3">Three</option>

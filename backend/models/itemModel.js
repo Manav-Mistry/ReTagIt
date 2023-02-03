@@ -1,7 +1,10 @@
 const mongoose = require("mongoose")
-const { stringify } = require("querystring")
+// const { stringify } = require("querystring")
 
 const itemSchema = mongoose.Schema({
+    user: {
+        type: String // email
+    },
     title: {
         type: String,
         require: [true, "Please add a title"]
@@ -16,7 +19,7 @@ const itemSchema = mongoose.Schema({
         require: [true, "Please add a description"]
     },
     price : {
-        type: Int16Array,
+        type: Number,
         require : [true, "please add price"]
     },
     state : {
@@ -34,4 +37,4 @@ const itemSchema = mongoose.Schema({
 
 })
 
-module.exports = mongoose.model('User', itemSchema)
+module.exports = mongoose.model('Item', itemSchema)
