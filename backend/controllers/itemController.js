@@ -3,15 +3,15 @@ const asyncHandler = require("express-async-handler")
 const Item = require("../models/itemModel")
 
 const addItem = asyncHandler( async (req, res) => {
-    const {title, category, description, price, state, city, neighbourhood} = req.body
+    const {user, title, category, description, price, state, city, neighbourhood} = req.body
 
     // backend validation
-    if(!title || !category || !description || !price || !state || !city || !neighbourhood) {
+    if(!user || !title || !category || !description || !price || !state || !city || !neighbourhood) {
+        console.log("user: ",user) 
        return res.status(400).json({message: "please include all fields"})
     }
 
     const item = await Item.create( {
-        // FIXME: pass user email from redux
         user,
         title,
         category,
