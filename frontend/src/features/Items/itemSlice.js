@@ -45,19 +45,19 @@ const itemSlice = createSlice({
     extraReducers: (builder) => {
         builder 
         .addCase(getAllItems.pending, (state) => {
-            isLoading = true
+            state.isLoading = true
         })
         .addCase(getAllItems.fulfilled, (state, action) => {
-            isLoading = false
-            isError = false
-            isSuccess = true
-            items = action.payload
+            state.isLoading = false
+            state.isError = false
+            state.isSuccess = true
+            state.items = action.payload
 
         })
         .addCase(getAllItems.rejected, (state, action) => {
-            isLoading = false
-            isError = true
-            message = action.payload
+            state.isLoading = false
+            state.isError = true
+            state.message = action.payload
         })
      
     }
