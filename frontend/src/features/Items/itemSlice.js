@@ -25,6 +25,20 @@ export const getAllItems = createAsyncThunk("item/getAllItems", async (thunkAPI)
 
 export const addItem = createAsyncThunk("item/addItem", async (item, thunkAPI) => {
     try{
+        console.log("In addItem itemSlice")
+        console.log(item.selectedFile)
+        // create a new formdata for the 
+        const formdata = new FormData()
+        formdata.append("imagefile", item.selectedFile)
+
+        for (var key of formdata.entries()) {
+            console.log(key[0] + ', ' + key[1]);
+        }
+
+        const fileId = await itemService.addImage(formdata)
+        console.log(fileId)
+        item.selectedFile = fileId.id
+        console.log("Item", item)
         return await itemService.addItem(item) 
     } catch(error) {
         const message =

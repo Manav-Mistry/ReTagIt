@@ -6,9 +6,17 @@ const {errorHandler} = require("./middleware/errorHandler")
 // const morgan = require('morgan');
 const connectDB = require("./config/db")
 
+// TODO: new version (upload image)
+const multer = require("multer");
+const GridFsStorage = require("multer-gridfs-storage");
+
 
 // connect to the database
-connectDB()
+const gfs = connectDB()
+
+// TODO: NEW
+// init gfs
+
 
 const app = express()
 app.use(cors())
@@ -18,6 +26,15 @@ app.use(express.urlencoded({extended: false}))
 app.use("/api/users", require("./routes/userRoutes"))
 
 app.use("/api/item", require("./routes/itemRoutes"))
+
+app.use("/api/image", (req, res, next)=>{
+    req.gfs = gfs;
+    next();
+})
+
+app.use("/api/image", require("./routes/imageRoutes"))
+
+// TODO: NEW
 
 app.use(errorHandler)
 

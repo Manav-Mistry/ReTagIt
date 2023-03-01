@@ -34,7 +34,10 @@ const itemSchema = mongoose.Schema({
         type: String,
         require: [true, "Please enter neighbourhood name"]
     },
-
+    selectedFile : {
+        type: String,
+        require: [true, "Please upload the item image"]
+    }
 })
 
 module.exports = mongoose.model('Item', itemSchema)

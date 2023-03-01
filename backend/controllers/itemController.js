@@ -3,10 +3,10 @@ const asyncHandler = require("express-async-handler")
 const Item = require("../models/itemModel")
 
 const addItem = asyncHandler( async (req, res) => {
-    const {user, title, category, description, price, state, city, neighbourhood} = req.body
+    const {user, title, category, description, price, state, city, neighbourhood, selectedFile} = req.body
 
     // backend validation
-    if(!user || !title || !category || !description || !price || !state || !city || !neighbourhood) {
+    if(!user || !title || !category || !description || !price || !state || !city || !neighbourhood || !selectedFile) {
         console.log("user: ",user) 
        return res.status(400).json({message: "please include all fields"})
     }
@@ -19,7 +19,8 @@ const addItem = asyncHandler( async (req, res) => {
         price, 
         state, 
         city, 
-        neighbourhood
+        neighbourhood,
+        selectedFile
     })
 
     if(item) {

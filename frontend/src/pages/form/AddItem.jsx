@@ -15,6 +15,7 @@ function AddItem() {
     city: "",
     neighbourhood: "",
   });
+  const [selectedFile, setSelectedFile] = useState(null);
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -71,13 +72,14 @@ function AddItem() {
     // console.log(name, email, password, password2);
     
     if (
-      title == "" ||
-      category == "" ||
-      description == "" ||
-      price == 0 ||
-      state == "" ||
-      city == "" ||
-      neighbourhood == ""
+      title === "" ||
+      category === "" ||
+      description === "" ||
+      price === 0 ||
+      state === "" ||
+      city === "" ||
+      neighbourhood === "" ||
+      selectedFile === null
       ) {
         toast.error("Please fill all the fields", {
           position: toast.POSITION.TOP_CENTER,
@@ -93,6 +95,8 @@ function AddItem() {
             state,
             city,
             neighbourhood,
+            // TODO: NEW
+            selectedFile
         };
         
       console.log(itemData);
@@ -104,7 +108,7 @@ function AddItem() {
 
       <div className="form">
         <div className="form-group">
-          <form onSubmit={onSubmit}>
+          <form onSubmit={onSubmit} encType="multipart/form-data">
             {/* title */}
             <input
               type="text"
@@ -171,6 +175,8 @@ function AddItem() {
               onChange={onChange}
               placeholder="Enter item title"
             />
+            {/* item-image */}
+            <input type="file" id="file" name="file" onChange={(e) => setSelectedFile(e.target.files[0])}/>
 
             {/* button */}
             <div className="form-group">
