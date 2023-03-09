@@ -5,6 +5,7 @@ const cors = require("cors")
 const {errorHandler} = require("./middleware/errorHandler")
 // const morgan = require('morgan');
 const connectDB = require("./config/db")
+const mongoose = require('mongoose')
 
 // TODO: new version (upload image)
 const multer = require("multer");
@@ -12,7 +13,15 @@ const GridFsStorage = require("multer-gridfs-storage");
 
 
 // connect to the database
-const gfs = connectDB()
+const conn = connectDB()
+let gfs;
+conn.once("open", () => {
+    // init stream
+    gfs = new mongoose.mongo.GridFSBucket(conn.db, {
+        bucketName: "uploads"
+    });
+    console.log("I am gfs: ",gfs);
+});
 
 // TODO: NEW
 // init gfs
@@ -28,6 +37,7 @@ app.use("/api/users", require("./routes/userRoutes"))
 app.use("/api/item", require("./routes/itemRoutes"))
 
 app.use("/api/image", (req, res, next)=>{
+    console.log("IN server", gfs)
     req.gfs = gfs;
     next();
 })

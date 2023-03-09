@@ -5,20 +5,17 @@ const connectDB = () => {
     try{
         // const conn = mongoose.createConnection(process.env.MONGO_URI)
         // TODO: change
-        
-        const conn = mongoose.connect(process.env.MONGO_URI, () => {
+        const conn1 = mongoose.connect(process.env.MONGO_URI, () => {
+            console.log("------------ mongoDB connected --------------")
+        });
+        const conn = mongoose.createConnection(process.env.MONGO_URI, () => {
             console.log("------------ mongoDB connected --------------")
         });
         
-        let gfs;
-        conn.then("open", () => {
-            // init stream
-            gfs = new mongoose.mongo.GridFSBucket(conn.db, {
-                bucketName: "uploads"
-            });
-        });
         
-        return gfs;
+        // console.log("gfs In db", gfs)
+        
+        return conn;
     }
     catch(error) {
         console.log(`Error : ${error}`);
