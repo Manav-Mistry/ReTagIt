@@ -14,10 +14,10 @@ function Item({item}) {
               className='item-image' 
               loading='lazy' 
               src={`http://localhost:5000/api/image/image/${item.selectedFile}`} alt="" />
-            <div className="inr-currency">
+            {/* <div className="inr-currency">
               
               <Currency code="INR" size="small" />
-            </div>
+            </div> */}
         </div>
         <div className='about-item'>
             {/* <div className='item-price'>1000</div>
@@ -32,6 +32,9 @@ function Item({item}) {
              <div className='item-location'>
                  {item.neighbourhood} {item.city} {item.state}
              </div> 
+             <div className="btn-ask">
+              <button className='ask-btn'>Request</button>
+             </div>
         </div>
     </div>
   )

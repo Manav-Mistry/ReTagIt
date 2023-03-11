@@ -3,37 +3,27 @@ import { useSelector, useDispatch } from "react-redux"
 import { useNavigate } from 'react-router-dom'
 import { reset, logout } from '../features/auth/authSlice'
 import Items from '../components/Items'
+import Navbar from '../components/Navbar'
 
 function Home() {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  // const dispatch = useDispatch()
+  // const navigate = useNavigate()
 
-  const {user} = useSelector((state) => state.auth)
+  // const {user} = useSelector((state) => state.auth)
 
-  function logoutUser() {
-    dispatch(logout())
-    dispatch(reset())
-  }
+  // function logoutUser() {
+  //   dispatch(logout())
+  //   dispatch(reset())
+  // }
 
-  function loginUser() {
-    navigate("/login")
-  }
+  // function loginUser() {
+  //   navigate("/login")
+  // }
 
   return (
     <>
-      <div>Home</div>
-      {/* login or logout */}
-      {user 
-        ? (
-          <>
-            Hello {user.name}
-            <button onClick={logoutUser}>Logout</button>
-          </>
-        )
-        : (
-          <button onClick={loginUser}>Login</button>
-        )}
-
+      <Navbar />
+      
         {/* display items */}
         <Items />
     </>

@@ -126,3 +126,16 @@
         gap: 2rem;
     }
 }
+
+.btn-ask{
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.ask-btn {
+    padding: 0.5rem 1rem;
+    background-color: var(--t-primary);
+    border-radius: 5px;
+    border-style: none;
+    color: white;
+}

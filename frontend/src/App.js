@@ -11,6 +11,7 @@ import { getAllItems } from "../src/features/Items/itemSlice"
 
 import './App.css';
 import AddItem from './pages/form/AddItem';
+import ViewAllItems from './pages/ViewAllItems';
 
 function App() {
   const dispatch = useDispatch()
@@ -24,6 +25,7 @@ function App() {
      <Router >       
         <Routes>
             <Route path="/" element={<Home />} />
+            <Route path='/viewAllItems' element={<ViewAllItems />} />
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
             <Route path='/addItem' element={<AddItem />} />
