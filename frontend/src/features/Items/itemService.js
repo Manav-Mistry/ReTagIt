@@ -7,8 +7,9 @@ const API_URL_IMG = "http://localhost:5000/api/image"
 const getAllItems = async () => {
     // get all items
     // TODO: create backend for get items
+    console.log("above get request")
     const items = await axios.get(`${API_URL}/`);
-    
+    console.log("IN item service", items.data)
     return items.data;
    
 }

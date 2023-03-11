@@ -32,6 +32,23 @@ const addItem = asyncHandler( async (req, res) => {
 
 } )
 
+const getItems = asyncHandler( async (req, res) => {
+    console.log("In get Items controller")
+    const items = await Item.find()
+    console.log(items)
+    if(items) {
+        // return items;
+        res.status(200).json({
+            items: items
+        })
+    } else {
+        res.status(400)
+        throw new Error("No Item Found")
+    }
+
+})
+
 module.exports = {
     addItem,
+    getItems
 }
