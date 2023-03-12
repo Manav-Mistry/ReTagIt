@@ -5,9 +5,9 @@ const jwt = require("jsonwebtoken")
 const User = require("../models/userModel")
 
 const registerUser = asyncHandler(async (req, res) => {
-    const {name, email, password} = req.body
+    const {name, email, mobile, password} = req.body
 
-    if(!name || !email || !password) {
+    if(!name || !email || !password || !mobile) {
        return res.status(400).json({message: "please include all fields"})
     }
 
@@ -27,6 +27,7 @@ const registerUser = asyncHandler(async (req, res) => {
     const user = await User.create({
         name,
         email,
+        mobile,
         password: hashedPassword
     })
 
@@ -35,6 +36,7 @@ const registerUser = asyncHandler(async (req, res) => {
             _id: user._id,
             name: user.name,
             email: user.email,
+            mobile: user.mobileNumber,
             token: generateToken(user._id)
         })
     } else {

@@ -45,7 +45,17 @@ function Navbar() {
                                     <div className='nav-link' onClick={loginUser}>Login</div>
                                 )}
                         </div>
-                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Requests
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><Link class="dropdown-item" to="#">Pending Requests</Link></li>
+                                <li><Link class="dropdown-item" to="#">All Requests</Link></li>
+                                {/* <li><hr class="dropdown-divider" /></li> */}
+                                {/* <li><Link class="dropdown-item" to="#">Something else here</Link></li> */}
+                            </ul>
+                        </li>
                     </div>
                 </div>
             </div>

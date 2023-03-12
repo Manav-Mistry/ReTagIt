@@ -9,11 +9,12 @@ function Register() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    mobile: 0,
     password: "",
     password2: "",
   });
 
-  const { name, email, password, password2 } = formData;
+  const { name, email, mobile, password, password2 } = formData;
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -60,6 +61,7 @@ function Register() {
       const userData = {
         name,
         email,
+        mobile,
         password,
       };
       dispatch(register(userData));
@@ -68,7 +70,7 @@ function Register() {
 
   return (
     <div className="container">
-      <div className="header"> {user} </div>
+      {/* <div className="header"> {user} </div> */}
 
       <div className="form">
         <div className="form-group">
@@ -93,6 +95,17 @@ function Register() {
               value={email}
               onChange={onChange}
               placeholder="Enter your email"
+            />
+
+            {/* mobile number */}
+            <input
+              type="number"
+              className="form-control"
+              id="mobile"
+              name="mobile"
+              value={mobile}
+              onChange={onChange}
+              placeholder="Enter your mobile number"
             />
 
             {/* password */}
