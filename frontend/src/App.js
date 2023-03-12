@@ -21,10 +21,12 @@ function App() {
 
   useEffect(() => {
     dispatch(reset())
-  }, [isSuccess, isError, isLoading, items])
+  }, [isSuccess, isError, isLoading])
 
   useEffect(() => {
+    console.log("in app.js")
     dispatch(getAllItems())
+    
   }, []);
 
   return (

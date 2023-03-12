@@ -41,7 +41,7 @@ function AddItem() {
       //   theme: "dark",
       // })
     }
-
+    console.log("--- in add item ---")
     // TODO: create reset reducer in itemSlice
     dispatch(reset())
 

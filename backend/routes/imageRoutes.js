@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const mongoose = require("mongoose")
 
 const {
   uploadImage,
@@ -9,6 +10,14 @@ const {
 } = require("../controllers/imageController");
 
 // const {protect} = require("../middleware/authMiddleware")
+
+function initialize_gfs (conn) {
+  let gfs1 = new mongoose.mongo.GridFSBucket(conn.db, {
+      bucketName: "uploads"
+  });
+
+  return gfs1
+}
 
 router.post("/upload", upload.single("imagefile"), (req, res) => {
   // console.log(first)
@@ -25,4 +34,7 @@ router.get("/", (req, res) => {
   return files
 })
 
-module.exports = router;
+module.exports = {
+    initialize_gfs, 
+    imageRouter: router
+};

@@ -10,25 +10,7 @@ function Item({item}) {
   // getting logged user
   const { user } = useSelector((state) => state.auth) 
 
-  // getting requested item details
-  const { message, isError, isLoading, isSuccess } = useSelector((state) => state.requestedItem)
   const dispatch = new useDispatch()
-
-  useEffect( () => {
-    if(isSuccess) {
-      toast.success(message, {
-        position: toast.POSITION.TOP_CENTER,
-        theme: "light",
-      })
-    } 
-    else if(isError) {
-      toast.error(message, {
-        position: toast.POSITION.TOP_CENTER,
-        theme: "dark",
-      })
-    }
-    dispatch(reset())
-  }, [message, isError, isSuccess, dispatch])
 
   // const loggedUser = localStorage.getItem("user");
 

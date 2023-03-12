@@ -21,7 +21,7 @@ const addRequestedItem = asyncHandler(async (req, res) => {
 
         if(requestedItem) {
             console.log("request successful")
-            res.status(201).json({message: "successfully requested"})
+            res.status(201).json("successfully requested")
         } else {
             res.status(400)
             throw new Error("There is some error, please try again")
