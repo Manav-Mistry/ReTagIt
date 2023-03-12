@@ -7,14 +7,21 @@ import Register from './pages/Register';
 import {ToastContainer} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import { useSelector, useDispatch } from "react-redux";
-import { getAllItems } from "../src/features/Items/itemSlice"
+import { getAllItems, reset } from "../src/features/Items/itemSlice"
 
 import './App.css';
 import AddItem from './pages/form/AddItem';
 import ViewAllItems from './pages/ViewAllItems';
 
 function App() {
+
+  const {items, isLoading, isError, isSuccess} = useSelector((state) => state.item)
+
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(reset())
+  }, [isSuccess, isError, isLoading, items])
 
   useEffect(() => {
     dispatch(getAllItems())

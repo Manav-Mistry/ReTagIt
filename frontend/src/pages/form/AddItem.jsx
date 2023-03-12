@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { addItem } from "../../features/Items/itemSlice"
+import { reset,addItem } from "../../features/Items/itemSlice"
 
 function AddItem() {
   const [formData, setFormData] = useState({
@@ -26,10 +26,9 @@ function AddItem() {
   
   useEffect(() => {
     if(isError) {
-      console.log("errror");
       toast.error(message, {
         position: toast.POSITION.TOP_CENTER,
-        theme: "light",
+        theme: "dark",
       })
     }
      
@@ -37,14 +36,14 @@ function AddItem() {
     if(isSuccess) {
       // redirect to home
       navigate("/")
-      toast.success(message, {
-        position: toast.POSITION.TOP_CENTER,
-        theme: "light",
-      })
+      // toast.success(message, {
+      //   position: toast.POSITION.TOP_CENTER,
+      //   theme: "dark",
+      // })
     }
 
     // TODO: create reset reducer in itemSlice
-    // dispatch(reset())
+    dispatch(reset())
 
   }, [isError, isSuccess, message, navigate, dispatch]) 
 

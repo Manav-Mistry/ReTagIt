@@ -24,7 +24,7 @@ const addItem = asyncHandler( async (req, res) => {
     })
 
     if(item) {
-        res.status(201).json("Item is successfully Added")
+        res.status(201).json({message : "Item is successfully Added"})
     } else {
         res.status(400)
         throw new Error("Invalid user data")
@@ -33,9 +33,9 @@ const addItem = asyncHandler( async (req, res) => {
 } )
 
 const getItems = asyncHandler( async (req, res) => {
-    console.log("In get Items controller")
+    // console.log("In get Items controller")
     const items = await Item.find()
-    console.log(items)
+    // console.log(items)
     if(items) {
         // return items;
         res.status(200).json({

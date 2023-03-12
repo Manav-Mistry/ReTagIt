@@ -31,9 +31,9 @@ const upload = multer({
 // @ get
 // @ "/image/:filename"
 const getImage = asyncHandler(async (req, res) => {
-  console.log("In get Image")
+  // console.log("In get Image")
     const gfs = req.gfs
-    console.log("gfs", gfs)
+    // console.log("gfs", gfs)
     const file = gfs
       .find({
         filename: req.params.filename,

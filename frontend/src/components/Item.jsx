@@ -1,16 +1,35 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Currency from 'react-currency-icons'
 import "../style/item.css"
 import { useSelector, useDispatch } from "react-redux";
 import {addRequestedItem} from "../features/requestedItem/requestedItemSlice"
 import { toast } from "react-toastify";
-
+import { reset } from '../features/requestedItem/requestedItemSlice';
 
 function Item({item}) {
   // getting logged user
-  const { user } = useSelector((state) => state.auth)
+  const { user } = useSelector((state) => state.auth) 
 
+  // getting requested item details
+  const { message, isError, isLoading, isSuccess } = useSelector((state) => state.requestedItem)
   const dispatch = new useDispatch()
+
+  useEffect( () => {
+    if(isSuccess) {
+      toast.success(message, {
+        position: toast.POSITION.TOP_CENTER,
+        theme: "light",
+      })
+    } 
+    else if(isError) {
+      toast.error(message, {
+        position: toast.POSITION.TOP_CENTER,
+        theme: "dark",
+      })
+    }
+    dispatch(reset())
+  }, [message, isError, isSuccess, dispatch])
+
   // const loggedUser = localStorage.getItem("user");
 
   const makeRequest = (item) => {
@@ -21,8 +40,13 @@ function Item({item}) {
       })
     }
     // console.log(item)
-    console.log(user)
-    // dispatch(addRequestedItem(item, user))
+    // console.log(user)
+    const r_item_user = {
+      item, 
+      user
+    }
+    dispatch(addRequestedItem(r_item_user))
+    console.log("after dispatch");
   }
 
   return (

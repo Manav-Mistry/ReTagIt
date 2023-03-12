@@ -20,7 +20,7 @@ conn.once("open", () => {
     gfs = new mongoose.mongo.GridFSBucket(conn.db, {
         bucketName: "uploads"
     });
-    console.log("I am gfs: ",gfs);
+    // console.log("I am gfs: ",gfs);
 });
 
 // TODO: NEW
@@ -32,12 +32,15 @@ app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
 
+
 app.use("/api/users", require("./routes/userRoutes"))
 
 app.use("/api/item", require("./routes/itemRoutes"))
 
+app.use("/api/requestedItem", require("./routes/requestedItemRotes"))
+
 app.use("/api/image", (req, res, next)=>{
-    console.log("IN server", gfs)
+    // console.log("IN server", gfs)
     req.gfs = gfs;
     next();
 })

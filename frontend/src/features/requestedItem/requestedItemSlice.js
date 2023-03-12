@@ -8,9 +8,10 @@ const initialState = {
     message: "",
 }
 
-export const addRequestedItem = createAsyncThunk(("requestedItem/addRequestedItem", async(r_item,user, thunkAPI) => {
+export const addRequestedItem = createAsyncThunk("requestedItem/addRequestedItem", async(r_item_user, thunkAPI) => {
     try {
-        return await requestedItemService.addRequestedItem(r_item, user)
+        console.log("In slice",r_item_user)
+        return await requestedItemService.addRequestedItem(r_item_user)
     } catch(error) {
         const message =
         (error.response &&
@@ -20,12 +21,19 @@ export const addRequestedItem = createAsyncThunk(("requestedItem/addRequestedIte
         error.toString();
       return thunkAPI.rejectWithValue(message);
     }
-}))
+})
 
 const requestedItemSlice = createSlice({
     name: "requestedItem",
     initialState,
-    reducers: {},
+    reducers: {
+        reset: (state) => {
+            state.isError = false
+            state.isLoading = false
+            state.isSuccess = false
+            state.message = ""
+        },
+    },
     extraReducers: (builder) => {
         builder
             .addCase(addRequestedItem.pending, (state) => {
@@ -35,6 +43,8 @@ const requestedItemSlice = createSlice({
                 state.isError = false
                 state.isLoading = false
                 state.isSuccess = true
+                state.message = action.payload
+                console.log("in fulfilled")
             })
             .addCase(addRequestedItem.rejected, (state, action) => {
                 state.isError = true
@@ -44,5 +54,7 @@ const requestedItemSlice = createSlice({
             })
     }
 })
+
+export const  { reset } = requestedItemSlice.actions
 
 export default requestedItemSlice.reducer

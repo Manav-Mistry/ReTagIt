@@ -55,7 +55,14 @@ export const addItem = createAsyncThunk("item/addItem", async (item, thunkAPI) =
 const itemSlice = createSlice({
     name: "item",
     initialState ,
-    reducers: {},
+    reducers: {
+        reset: (state) => {
+            state.isError = false;
+            state.isLoading = false;
+            state.isSuccess = false;
+            state.message = "";
+        },
+    },
     extraReducers: (builder) => {
         builder 
         .addCase(getAllItems.pending, (state) => {
@@ -73,10 +80,25 @@ const itemSlice = createSlice({
             state.isError = true
             state.message = action.payload
         })
+        .addCase(addItem.pending, (state) => {
+            state.isLoading = true
+        })
+        .addCase(addItem.fulfilled, (state, action) => {
+            state.isLoading = false
+            state.isError = false
+            state.isSuccess = true
+            state.message = action.payload
+
+        })
+        .addCase(addItem.rejected, (state, action) => {
+            state.isLoading = false
+            state.isError = true
+            state.message = action.payload
+        })
      
     }
 })
 
 
-export const {  } = itemSlice.actions;
+export const { reset } = itemSlice.actions;
 export default itemSlice.reducer;

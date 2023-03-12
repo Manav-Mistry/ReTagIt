@@ -3,16 +3,16 @@ const mongoose = require("mongoose")
 
 const requestedItemSchema = mongoose.Schema({
     owner: {
-        type: String // email
+        type: Object // email
     },
     requestedUser: {
-        type: String
+        type: Object
     },
     date: {
         type: Object
     },
     item: {
-        type: String
+        type: Object
     },
     Permission : {
         type: Boolean,        
