@@ -15,7 +15,7 @@ let gfs;
 
 connectDB().then(() => {
     const conn = mongoose.connection;
-    console.log("------- connection ----------",conn)
+    // console.log("------- connection ----------",conn)
     gfs = initialize_gfs(conn)
 
 })

@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux"
 import { useNavigate } from 'react-router-dom'
 import { reset, logout } from '../features/auth/authSlice'
 import Items from '../components/Items'
-import Navbar from '../components/Navbar'
 
 function Home() {
   // const dispatch = useDispatch()
@@ -22,9 +21,6 @@ function Home() {
 
   return (
     <>
-      <Navbar />
-      
-        {/* display items */}
         <Items />
     </>
 

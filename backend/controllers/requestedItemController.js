@@ -1,9 +1,10 @@
 const asyncHandler = require("express-async-handler")
 
 const RequestedItem = require("../models/requestedItemModel")
+const requestedItemModel = require("../models/requestedItemModel")
 
 const addRequestedItem = asyncHandler(async (req, res) => {
-    console.log("Hii Manav");
+    
     const {item, user} = req.body
 
     if( user != null || item != null) {
@@ -32,6 +33,14 @@ const addRequestedItem = asyncHandler(async (req, res) => {
     }
 }) 
 
+const getAllRequestedItems = (asyncHandler( async (req, res) => {
+    const user = req.user
+
+    const r_items = await requestedItemModel.find({owner: user.email})
+    res.status(200).json(r_items)
+}))
+
 module.exports = {
-    addRequestedItem
+    addRequestedItem,
+    getAllRequestedItems
 }

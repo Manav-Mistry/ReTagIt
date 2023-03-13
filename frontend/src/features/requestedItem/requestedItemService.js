@@ -9,6 +9,7 @@ const addRequestedItem = async (r_item_user) => {
         "user" : r_item_user.user
     }
     console.log(r_item_user.item, r_item_user.user)
+    console.log(localStorage.getItem("token"))
 
     const resp = await axios.post(`${API_URL}/`, r_item_user_seperated, {
         headers: {
@@ -18,8 +19,19 @@ const addRequestedItem = async (r_item_user) => {
     return resp.data
 }
 
+const getAllRequests = async () => {
+    console.log("in service")
+    const resp = await axios.get(`${API_URL}/`, {
+        headers: {
+            "authorization" : `Bearer ${localStorage.getItem("token")}`
+        }
+    })
+    return resp.data 
+}
+
 const requestedItemService = {
-    addRequestedItem
+    addRequestedItem,
+    getAllRequests
 }
 
 export default requestedItemService

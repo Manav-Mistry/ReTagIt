@@ -14,7 +14,7 @@ const requestedItemSchema = mongoose.Schema({
     item: {
         type: Object
     },
-    Permission : {
+    permission : {
         type: Boolean,        
     }
 })

@@ -9,7 +9,7 @@ const initialState = {
     message: "",
 };
 
-export const getAllItems = createAsyncThunk("item/getAllItems", async (thunkAPI) => {
+export const getAllItems = createAsyncThunk("item/getAllItems", async (_, thunkAPI) => {
     try{
         return await itemService.getAllItems() 
     } catch(error) {

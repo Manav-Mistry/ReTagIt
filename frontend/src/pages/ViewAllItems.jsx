@@ -21,10 +21,9 @@ function ViewAllItems() {
             }
           </>
         ) : (
-          <>
-            
+          <div className='center-div'>
             <span className="loader"></span>
-          </>
+          </div>
         )
       }
     </div>

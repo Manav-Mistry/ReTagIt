@@ -26,6 +26,7 @@ const login = async (userData) => {
 
 const logout = async () => {
     localStorage.removeItem("user")
+    localStorage.removeItem("token")
 }
 
 export const authService = {

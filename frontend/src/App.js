@@ -12,6 +12,8 @@ import { getAllItems, reset } from "../src/features/Items/itemSlice"
 import './App.css';
 import AddItem from './pages/form/AddItem';
 import ViewAllItems from './pages/ViewAllItems';
+import ViewAllRequests from './pages/ViewAllRequests';
+import Navbar from "./components/Navbar"
 
 function App() {
 
@@ -31,13 +33,15 @@ function App() {
 
   return (
     <>
-     <Router >       
+     <Router >   
+        <Navbar />    
         <Routes>
             <Route path="/" element={<Home />} />
             <Route path='/viewAllItems' element={<ViewAllItems />} />
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
             <Route path='/addItem' element={<AddItem />} />
+            <Route path='/viewAllRequests' element={<ViewAllRequests /> } ></Route>
         </Routes>
     </Router>
     <ToastContainer />
