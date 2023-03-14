@@ -1,5 +1,6 @@
 :root{
   --t-primary: #CC0000;
+  --t-secondary-light: lightgrey;
 }
 
 body {

@@ -3,16 +3,49 @@ import requestedItemService from "./requestedItemService"
 
 const initialState = {
     r_items: [],
+    r_items_accepted: [],
     isError: false,
     isSuccess: false,
     isLoading: false,
     message: "",
+    item_swaped: false
 }
+
+
+export const acceptRequest = createAsyncThunk("requestedItem/acceptRequest", async(r_item_id, thunkAPI) => {
+    try {
+        return await requestedItemService.acceptRequest(r_item_id)
+    } catch (error) {
+        const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+})
+
 
 export const viewAllRequests = createAsyncThunk("requestedItem/viewAllRequests", async(_, thunkAPI) => {
     try{
         console.log("In slice")
         return await requestedItemService.getAllRequests()
+    } catch(error) {
+        const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+})
+
+export const viewAllAcceptedItem = createAsyncThunk("requestedItem/viewAllAcceptedItem", async(_, thunkAPI) => {
+    try{
+        console.log("In slice")
+        return await requestedItemService.getAllAcceptedRequests()
     } catch(error) {
         const message =
         (error.response &&
@@ -48,6 +81,7 @@ const requestedItemSlice = createSlice({
             state.isLoading = false
             state.isSuccess = false
             state.message = ""
+            state.item_swaped = false
         },
     },
     extraReducers: (builder) => {
@@ -77,6 +111,34 @@ const requestedItemSlice = createSlice({
                 state.r_items = action.payload
             })
             .addCase(viewAllRequests.rejected, (state, action) => {
+                state.isError = true
+                state.isSuccess = false
+                state.isLoading = false
+                state.message = action.payload
+            })
+            .addCase(acceptRequest.fulfilled, (state, action) => {
+                state.isError = false
+                state.isLoading = false
+                state.isSuccess = true
+                state.message = action.payload
+                state.item_swaped = true
+            })
+            .addCase(acceptRequest.rejected, (state, action) => {
+                state.isError = true
+                state.isSuccess = false
+                state.isLoading = false
+                state.message = action.payload
+            })
+            .addCase(viewAllAcceptedItem.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(viewAllAcceptedItem.fulfilled, (state, action) => {
+                state.isError = false
+                state.isLoading = false
+                state.isSuccess = true
+                state.r_items_accepted = action.payload
+            })
+            .addCase(viewAllAcceptedItem.rejected, (state, action) => {
                 state.isError = true
                 state.isSuccess = false
                 state.isLoading = false

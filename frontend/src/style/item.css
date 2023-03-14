@@ -139,3 +139,31 @@
     border-style: none;
     color: white;
 }
+
+.success-reject-btns {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.reject-btn {
+    padding: 0.3rem 1rem;
+    /* background-color: white; */
+    border-radius: 15px;
+    border-color: var(--t-primary);
+    color: var(--t-primary);
+}
+
+.success-btn {
+    padding: 0.3rem 1rem;
+    background-color: var(--t-primary);
+    border-radius: 15px;
+    border-style: none;
+    color: white;
+}
+
+.accepted {
+    font-size: larger;
+    color: green;
+}

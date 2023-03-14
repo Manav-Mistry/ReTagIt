@@ -29,9 +29,32 @@ const getAllRequests = async () => {
     return resp.data 
 }
 
+const getAllAcceptedRequests = async () => {
+    console.log("in service")
+    const resp = await axios.get(`${API_URL}/accepted`, {
+        headers: {
+            "authorization" : `Bearer ${localStorage.getItem("token")}`
+        }
+    })
+    return resp.data 
+}
+
+const acceptRequest = async (r_item_id) => {
+    console.log("in service",r_item_id)
+    const resp = await axios.post(`${API_URL}/accept/`, r_item_id, {
+        headers : {
+            "authorization" : `Bearer ${localStorage.getItem("token")}`
+        }
+    })
+    return resp.data
+}
+
+
 const requestedItemService = {
     addRequestedItem,
-    getAllRequests
+    getAllRequests,
+    acceptRequest,
+    getAllAcceptedRequests
 }
 
 export default requestedItemService

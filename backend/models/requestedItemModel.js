@@ -16,6 +16,9 @@ const requestedItemSchema = mongoose.Schema({
     },
     permission : {
         type: Boolean,        
+    },
+    isRequestComplete : {
+        type: Boolean
     }
 })
 

@@ -11,13 +11,17 @@ const addRequestedItem = asyncHandler(async (req, res) => {
         console.log("In r_item controller: ",item, user)
         const date = new Date()
         const permission = false
+        
+        // isRequestComplete false -> pending 
+        const isRequestComplete = false
 
         const requestedItem = await RequestedItem.create({
             owner: item.user,
             requestedUser: user,
             item,
             date,
-            permission
+            permission,
+            isRequestComplete
         })
 
         if(requestedItem) {
@@ -36,11 +40,32 @@ const addRequestedItem = asyncHandler(async (req, res) => {
 const getAllRequestedItems = (asyncHandler( async (req, res) => {
     const user = req.user
 
-    const r_items = await requestedItemModel.find({owner: user.email})
+    const r_items = await requestedItemModel.find({owner: user.email, isRequestComplete: false})
     res.status(200).json(r_items)
 }))
 
+const getAllAcceptedRequestedItems = (asyncHandler( async (req, res) => {
+    const user = req.user
+
+    const r_items = await requestedItemModel.find({owner: user.email, isRequestComplete: true})
+    res.status(200).json(r_items)
+}))
+
+const acceptRequest = (asyncHandler(async (req, res) => {
+    const { r_item_id } = req.body
+    
+    // get the r_item with id r_item_id
+    const r_item = await requestedItemModel.findOne({_id: r_item_id});
+    console.log("them: ",r_item);
+    r_item.isRequestComplete = true
+    await requestedItemModel.updateOne({_id:r_item_id},r_item)
+    res.status(201).json({message: "successfuly accepted"})
+
+})) 
+
 module.exports = {
     addRequestedItem,
-    getAllRequestedItems
+    getAllRequestedItems,
+    acceptRequest,
+    getAllAcceptedRequestedItems
 }
