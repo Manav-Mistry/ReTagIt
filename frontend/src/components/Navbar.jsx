@@ -100,50 +100,60 @@ function Navbar() {
         <nav className="navbar navbar-expand-lg navbar-dark">
             <div className="container-fluid">
 
-                <Link className="navbar-brand" to="/">Navbar</Link>
+                <Link className="navbar-brand" to="/">
+                {/* <img src="./img/logo-01.png" alt="" width="50" height="50" /> */}
+                ReTagIt
+                </Link>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
+
                 <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div className="navbar-nav">
-                        <a className="nav-link active" aria-current="page" href="#">Home</a>
-                        <Link className="nav-link" to="/viewAllItems">All Items</Link>
-                        <div className="nav-link" onClick={addItem}>Add Item</div>
-                        <div>
-                            {user
-                                ? (
-                                    <>
-                                        {/* Hello {user.name} */}
-                                        <div className='nav-link' onClick={logoutUser}>Logout</div>
-                                    </>
-                                )
-                                : (
-                                    <div className='nav-link' onClick={loginUser}>Login</div>
-                                )}
+                    <div className='navbar-complete'>
+
+                        <div className="navbar-nav">
+                           
+                            <Link className="nav-link" to="/viewAllItems">All Items</Link>
+                            <div className="nav-link" onClick={addItem}>Add Item</div>
+                            <div>
+                                {user
+                                    ? (
+                                        <>
+                                            {/* Hello {user.name} */}
+                                            <div className='nav-link' onClick={logoutUser}>Logout</div>
+                                        </>
+                                    )
+                                    : (
+                                        <div className='nav-link' onClick={loginUser}>Login</div>
+                                    )}
+                            </div>
+                            
+                            <li className="nav-item dropdown">
+                                <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Requests
+                                </a>
+                                <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><div className="dropdown-item" onClick={viewAllAcceptedRequests}>Accepted Requests</div></li>
+                                    <li><div className="dropdown-item" onClick={viewRequests}>Pending Requests</div></li>
+                                    {/* <li><hr className="dropdown-divider" /></li> */}
+                                    {/* <li><Link className="dropdown-item" to="#">Something else here</Link></li> */}
+                                </ul>
+                            </li>
+                            <li className="nav-item dropdown">
+                                <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Your Requests
+                                </a>
+                                <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><div className="dropdown-item" onClick={viewAllRequests}>All Requests</div></li>
+                                                                
+                                </ul>
+                            </li>
                         </div>
-                        
-                        <li className="nav-item dropdown">
-                            <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Requests
-                            </a>
-                            <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><div className="dropdown-item" onClick={viewAllAcceptedRequests}>Accepted Requests</div></li>
-                                <li><div className="dropdown-item" onClick={viewRequests}>Pending Requests</div></li>
-                                {/* <li><hr className="dropdown-divider" /></li> */}
-                                {/* <li><Link className="dropdown-item" to="#">Something else here</Link></li> */}
-                            </ul>
-                        </li>
-                        <li className="nav-item dropdown">
-                            <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Your Requests
-                            </a>
-                            <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><div className="dropdown-item" onClick={viewAllRequests}>All Requests</div></li>
-                                
-                               
-                            </ul>
-                        </li>
+                                    
                     </div>
+
+
+
                 </div>
             </div>
         </nav>

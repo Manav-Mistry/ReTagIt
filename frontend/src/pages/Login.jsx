@@ -2,14 +2,15 @@ import React from 'react'
 import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import { login, reset } from "../features/auth/authSlice";
-import {useSelector, useDispatch} from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { toast } from "react-toastify";
+import "../style/login.css"
 
 function Login() {
 
   const [formData, setFormData] = useState({
     email: "",
-    password: "" 
+    password: ""
   });
 
   const { email, password } = formData;
@@ -17,18 +18,18 @@ function Login() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const {user, isError, isLoading, isSuccess, message} = useSelector((state) => state.auth)
+  const { user, isError, isLoading, isSuccess, message } = useSelector((state) => state.auth)
 
   // useEffect
   useEffect(() => {
-    if(isError) {
+    if (isError) {
       toast.error(message, {
         position: toast.POSITION.TOP_CENTER,
         theme: "light",
       })
     }
 
-    if(isSuccess || user) {
+    if (isSuccess || user) {
       navigate("/")
     }
 
@@ -54,43 +55,54 @@ function Login() {
   };
 
   return (
-    <div className="container">
-      {/* <div className="header"> {user} </div> */}
+    <div className='center-div'>
 
-      <div className="form" >
-        <div className="form-group">
-          <form onSubmit={onSubmit}>           
 
-            {/* email */}
-            <input
-              type="email"
-              className="form-control"
-              id="email"
-              name="email"
-              value={email}
-              onChange={onChange}
-              placeholder="Enter your email"
-            />
+      <div className='formFlex'>
 
-            {/* password */}
-            <input
-              type="password"
-              className="form-control"
-              id="password"
-              name="password"
-              value={password}
-              onChange={onChange}
-              placeholder="Enter your password"
-            />       
+        <div>
+          <img src='./img/login.svg' width={400} />
+        </div>
 
-            {/* button */}
-            <div className="form-group">
-              <button type="submit" className="btn btn-block">
-                Login
-              </button>
-            </div>
+        <div className="form" >
+          <div className="form-group">
+            <form onSubmit={onSubmit}>
 
-          </form>
+              <h2 className='login-title'>Login</h2>
+              {/* email */}
+              <input
+                type="email"
+                className="form-control"
+                id="email"
+                name="email"
+                value={email}
+                onChange={onChange}
+                placeholder="Enter your email"
+              />
+
+              {/* password */}
+              <input
+                type="password"
+                className="form-control"
+                id="password"
+                name="password"
+                value={password}
+                onChange={onChange}
+                placeholder="Enter your password"
+              />
+
+              {/* button */}
+              <div className="form-group login-btn d-flex justify-content-between">
+                <button className="btn btn-block register-btn-btn" onClick={navigate("/register")}>
+                  Register
+                </button>
+                <button type="submit" className="btn btn-block login-btn-btn">
+                  Login
+                </button>
+              </div>
+
+            </form>
+          </div>
         </div>
       </div>
     </div>

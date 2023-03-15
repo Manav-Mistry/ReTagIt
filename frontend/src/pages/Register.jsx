@@ -4,6 +4,7 @@ import { register, reset } from "../features/auth/authSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import "../style/login.css"
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -39,7 +40,7 @@ function Register() {
 
     dispatch(reset())
 
-  }, [isError, isSuccess, message, user, navigate, dispatch]) 
+  }, [isError, isSuccess, message, user, dispatch]) 
 
   const onChange = (e) => {
     setFormData((prev) => ({
@@ -69,13 +70,18 @@ function Register() {
   };
 
   return (
-    <div className="container">
+    <div className="center-div">
+    <div className="formFlex ">
       {/* <div className="header"> {user} </div> */}
+      <div>
+          <img src='./img/register.svg' width={400} />
+      </div>
 
       <div className="form">
         <div className="form-group">
           <form onSubmit={onSubmit}>
             {/* name */}
+            <h2 className='login-title'>Register</h2>
             <input
               type="text"
               className="form-control"
@@ -131,14 +137,18 @@ function Register() {
             />
 
             {/* button */}
-            <div className="form-group">
-              <button type="submit" className="btn btn-block">
-                Submit
-              </button>
-            </div>
+            <div className="form-group login-btn d-flex justify-content-between">
+                <button className="btn btn-block register-btn-btn" onClick={navigate("/login")}>
+                  Login
+                </button>
+                <button type="submit" className="btn btn-block login-btn-btn">
+                  Register
+                </button>
+              </div>
           </form>
         </div>
       </div>
+    </div>
     </div>
   );
 }
