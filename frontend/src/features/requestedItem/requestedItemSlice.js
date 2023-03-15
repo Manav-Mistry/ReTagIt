@@ -2,7 +2,8 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import requestedItemService from "./requestedItemService"
 
 const initialState = {
-    r_items: [],
+    r_items_all : [],
+    r_items: [], // pending
     r_items_accepted: [],
     isError: false,
     isSuccess: false,
@@ -16,6 +17,36 @@ export const acceptRequest = createAsyncThunk("requestedItem/acceptRequest", asy
     try {
         return await requestedItemService.acceptRequest(r_item_id)
     } catch (error) {
+        const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+})
+
+export const deniedRequest = createAsyncThunk("requestedItem/deniedRequest", async(r_item_id, thunkAPI) => {
+    try {
+        return await requestedItemService.deniedRequest(r_item_id)
+    } catch (error) {
+        const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+})
+
+
+export const viewAllPendingRequests = createAsyncThunk("requestedItem/viewAllPendingRequests", async(_, thunkAPI) => {
+    try{
+        console.log("In slice")
+        return await requestedItemService.getAllPendingRequests()
+    } catch(error) {
         const message =
         (error.response &&
           error.response.data &&
@@ -101,16 +132,16 @@ const requestedItemSlice = createSlice({
                 state.isLoading = false
                 state.message = action.payload
             })
-            .addCase(viewAllRequests.pending, (state) => {
+            .addCase(viewAllPendingRequests.pending, (state) => {
                 state.isLoading = true
             })
-            .addCase(viewAllRequests.fulfilled, (state, action) => {
+            .addCase(viewAllPendingRequests.fulfilled, (state, action) => {
                 state.isError = false
                 state.isLoading = false
                 state.isSuccess = true
                 state.r_items = action.payload
             })
-            .addCase(viewAllRequests.rejected, (state, action) => {
+            .addCase(viewAllPendingRequests.rejected, (state, action) => {
                 state.isError = true
                 state.isSuccess = false
                 state.isLoading = false
@@ -139,6 +170,38 @@ const requestedItemSlice = createSlice({
                 state.r_items_accepted = action.payload
             })
             .addCase(viewAllAcceptedItem.rejected, (state, action) => {
+                state.isError = true
+                state.isSuccess = false
+                state.isLoading = false
+                state.message = action.payload
+            })
+            .addCase(deniedRequest.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(deniedRequest.fulfilled, (state, action) => {
+                state.isError = false
+                state.isLoading = false
+                state.isSuccess = true
+                state.message = action.payload
+                state.item_swaped = true
+            })
+            .addCase(deniedRequest.rejected, (state, action) => {
+                state.isError = true
+                state.isSuccess = false
+                state.isLoading = false
+                state.message = action.payload
+            })
+            .addCase(viewAllRequests.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(viewAllRequests.fulfilled, (state, action) => {
+                state.isError = false
+                state.isLoading = false
+                state.isSuccess = true
+                state.r_items_all = action.payload
+                
+            })
+            .addCase(viewAllRequests.rejected, (state, action) => {
                 state.isError = true
                 state.isSuccess = false
                 state.isLoading = false

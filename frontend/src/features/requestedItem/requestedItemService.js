@@ -19,6 +19,16 @@ const addRequestedItem = async (r_item_user) => {
     return resp.data
 }
 
+const getAllPendingRequests = async () => {
+    console.log("in service")
+    const resp = await axios.get(`${API_URL}/pending`, {
+        headers: {
+            "authorization" : `Bearer ${localStorage.getItem("token")}`
+        }
+    })
+    return resp.data 
+}
+
 const getAllRequests = async () => {
     console.log("in service")
     const resp = await axios.get(`${API_URL}/`, {
@@ -49,12 +59,24 @@ const acceptRequest = async (r_item_id) => {
     return resp.data
 }
 
+const deniedRequest = async (r_item_id) => {
+    console.log("in service",r_item_id)
+    const resp = await axios.post(`${API_URL}/denied/`, r_item_id, {
+        headers : {
+            "authorization" : `Bearer ${localStorage.getItem("token")}`
+        }
+    })
+    return resp.data
+}
+
 
 const requestedItemService = {
     addRequestedItem,
-    getAllRequests,
+    getAllPendingRequests,
     acceptRequest,
-    getAllAcceptedRequests
+    getAllAcceptedRequests,
+    deniedRequest,
+    getAllRequests
 }
 
 export default requestedItemService

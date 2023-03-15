@@ -1,6 +1,6 @@
 import React from 'react'
 import { useEffect } from 'react'
-import {viewAllRequests, reset} from "../features/requestedItem/requestedItemSlice"
+import {viewAllPendingRequests, reset} from "../features/requestedItem/requestedItemSlice"
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import RItems from '../components/RItems'
@@ -13,11 +13,11 @@ function ViewAllRequests() {
   const dispatch = useDispatch()
   useEffect(() => {
     console.log("In view all requests")
-    dispatch(viewAllRequests())
+    dispatch(viewAllPendingRequests())
   }, [])
 
   useEffect(() => {
-    dispatch(viewAllRequests())
+    dispatch(viewAllPendingRequests())
   }, [item_swaped])
 
   useEffect(() => {

@@ -61,6 +61,24 @@ function Navbar() {
         }
     }
 
+    function viewAllRequests() {
+        if(user != null) {
+            console.log('inside');
+            navigate("/viewAllRequestsByUser");
+        } else {
+            toast.warn('Please Login first', {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                });
+        }
+    }
+
     function addItem() {
         if(user != null) {
             navigate("/addItem")
@@ -113,6 +131,16 @@ function Navbar() {
                                 <li><div className="dropdown-item" onClick={viewRequests}>Pending Requests</div></li>
                                 {/* <li><hr className="dropdown-divider" /></li> */}
                                 {/* <li><Link className="dropdown-item" to="#">Something else here</Link></li> */}
+                            </ul>
+                        </li>
+                        <li className="nav-item dropdown">
+                            <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Your Requests
+                            </a>
+                            <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><div className="dropdown-item" onClick={viewAllRequests}>All Requests</div></li>
+                                
+                               
                             </ul>
                         </li>
                     </div>

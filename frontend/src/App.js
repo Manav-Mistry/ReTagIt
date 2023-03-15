@@ -14,6 +14,7 @@ import AddItem from './pages/form/AddItem';
 import ViewAllItems from './pages/ViewAllItems';
 import ViewAllRequests from './pages/ViewAllRequests';
 import ViewAllAcceptedRequests from './pages/ViewAllAcceptedRequests';
+import ViewAllRequestsByUser from './pages/ViewAllRequestsByUser';
 import Navbar from "./components/Navbar"
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
             <Route path='/addItem' element={<AddItem />} />
             <Route path='/viewAllRequests' element={<ViewAllRequests /> } ></Route>
             <Route path='/viewAllAcceptedRequests' element={<ViewAllAcceptedRequests /> } ></Route>
+            <Route path='/viewAllRequestsByUser' element={<ViewAllRequestsByUser /> } ></Route>
         </Routes>
     </Router>
     <ToastContainer />

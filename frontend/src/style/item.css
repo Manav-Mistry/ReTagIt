@@ -167,3 +167,13 @@
     font-size: larger;
     color: green;
 }
+
+.msg {
+    font-size: larger;
+    color: rgb(152, 152, 0)
+}
+
+.rejected {
+    font-size: larger;
+    color: red
+}
