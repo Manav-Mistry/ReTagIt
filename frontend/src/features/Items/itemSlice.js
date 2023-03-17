@@ -7,6 +7,7 @@ const initialState = {
     isSuccess: false,
     isLoading: false,
     message: "",
+    itemAdded: false
 };
 
 export const getAllItems = createAsyncThunk("item/getAllItems", async (_, thunkAPI) => {
@@ -61,6 +62,7 @@ const itemSlice = createSlice({
             state.isLoading = false;
             state.isSuccess = false;
             state.message = "";
+            state.itemAdded = false;
         },
     },
     extraReducers: (builder) => {
@@ -88,6 +90,7 @@ const itemSlice = createSlice({
             state.isError = false
             state.isSuccess = true
             state.message = action.payload
+            state.itemAdded = true
 
         })
         .addCase(addItem.rejected, (state, action) => {

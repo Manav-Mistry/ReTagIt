@@ -19,19 +19,25 @@ import Navbar from "./components/Navbar"
 
 function App() {
 
-  const {items, isLoading, isError, isSuccess} = useSelector((state) => state.item)
+  const {items, isLoading, isError, isSuccess, itemAdded} = useSelector((state) => state.item)
 
   const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(reset())
-  }, [isSuccess, isError, isLoading])
+  }, [isSuccess, isError, isLoading, itemAdded])
 
   useEffect(() => {
     console.log("in app.js")
     dispatch(getAllItems())
     
   }, []);
+
+  useEffect(() => {
+    console.log("in app.js")
+    dispatch(getAllItems())
+    
+  }, [itemAdded]);
 
   return (
     <>

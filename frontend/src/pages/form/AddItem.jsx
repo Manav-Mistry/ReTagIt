@@ -8,9 +8,7 @@ import { reset,addItem } from "../../features/Items/itemSlice"
 function AddItem() {
   const [formData, setFormData] = useState({
     title: "",
-    category: "",
     description: "",
-    price: 0,
     state: "",
     city: "",
     neighbourhood: "",
@@ -48,7 +46,7 @@ function AddItem() {
   }, [isError, isSuccess, message, navigate, dispatch]) 
 
 
-  const {title, category, description, price, state, city, neighbourhood} = formData;
+  const {title, description, state, city, neighbourhood} = formData;
 
   const onChange = (e) => {
     // console.log(e.target.value)
@@ -58,13 +56,13 @@ function AddItem() {
     }));
   }
 
-  const onChangeSelectionList = (e) => {
-    console.log(e.target.value)
-    setFormData((prev) => ({
-      ...prev,
-      ["category"]: e.target.value,
-    }));
-  }
+  // const onChangeSelectionList = (e) => {
+  //   console.log(e.target.value)
+  //   setFormData((prev) => ({
+  //     ...prev,
+  //     ["category"]: e.target.value,
+  //   }));
+  // }
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -72,9 +70,7 @@ function AddItem() {
     
     if (
       title === "" ||
-      category === "" ||
       description === "" ||
-      price === 0 ||
       state === "" ||
       city === "" ||
       neighbourhood === "" ||
@@ -87,10 +83,8 @@ function AddItem() {
         // console.log(itemData);
       } else {
         const itemData = {
-            title,
-            category,
+            title,          
             description,
-            price,
             state,
             city,
             neighbourhood,
@@ -119,28 +113,10 @@ function AddItem() {
               placeholder="Enter item title"
             />
 
-            {/* category */}
-            <select className="form-select" aria-label="Default select example" onChange={onChangeSelectionList}>
-                <option name="category" value="1">One</option>
-                <option name="category" value="2">Two</option>
-                <option name="category" value="3">Three</option>
-            </select>
-
             {/* description */}
-            <textarea id="w3review" name="description" rows="4" cols="50" onChange={onChange}>
+            <textarea id="w3review" name="description" rows="4" cols="50" onChange={onChange} className="form-control" placeholder="Description">
                 
             </textarea>
-
-            {/* price */}
-            <input
-              type="number"
-              className="form-control"
-              id="price"
-              name="price"
-              value={price}
-              onChange={onChange}
-              placeholder="Enter item title"
-            />
 
             {/* state */}
             <input
@@ -150,7 +126,7 @@ function AddItem() {
               name="state"
               value={state}
               onChange={onChange}
-              placeholder="Enter item title"
+              placeholder="state"
             />
 
             {/* city */}
@@ -161,7 +137,7 @@ function AddItem() {
               name="city"
               value={city}
               onChange={onChange}
-              placeholder="Enter item title"
+              placeholder="city"
             />
 
             {/* neighbourhood */}
@@ -172,14 +148,14 @@ function AddItem() {
               name="neighbourhood"
               value={neighbourhood}
               onChange={onChange}
-              placeholder="Enter item title"
+              placeholder="neighbourhood"
             />
             {/* item-image */}
             <input type="file" id="file" name="file" onChange={(e) => setSelectedFile(e.target.files[0])}/>
 
             {/* button */}
             <div className="form-group">
-              <button type="submit" className="btn btn-block">
+              <button type="submit" className="btn btn-block addItem-btn">
                 Submit
               </button>
             </div>

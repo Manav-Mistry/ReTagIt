@@ -2,6 +2,7 @@ const asyncHandler = require("express-async-handler")
 
 const RequestedItem = require("../models/requestedItemModel")
 const requestedItemModel = require("../models/requestedItemModel")
+const User = require("../models/userModel")
 
 const addRequestedItem = asyncHandler(async (req, res) => {
     
@@ -14,9 +15,11 @@ const addRequestedItem = asyncHandler(async (req, res) => {
         
         // isRequestComplete false -> pending 
         const isRequestComplete = false
+        const owner = await User.findOne({"email": item.user})
+        console.log("owner -----", owner)
 
         const requestedItem = await RequestedItem.create({
-            owner: item.user,
+            owner: owner,
             requestedUser: user,
             item,
             date,
@@ -40,7 +43,7 @@ const addRequestedItem = asyncHandler(async (req, res) => {
 const getAllPendingRequestedItems = (asyncHandler( async (req, res) => {
     const user = req.user
 
-    const r_items = await requestedItemModel.find({owner: user.email, isRequestComplete: false})
+    const r_items = await requestedItemModel.find({"owner.email": user.email, isRequestComplete: false})
     res.status(200).json(r_items)
 }))
 
@@ -57,7 +60,7 @@ const getAllRequestedItems = (asyncHandler( async (req, res) => {
 const getAllAcceptedRequestedItems = (asyncHandler( async (req, res) => {
     const user = req.user
 
-    const r_items = await requestedItemModel.find({owner: user.email, permission: true})
+    const r_items = await requestedItemModel.find({"owner.email": user.email, permission: true})
     res.status(200).json(r_items)
 }))
 

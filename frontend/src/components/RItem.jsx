@@ -26,6 +26,8 @@ function RItem({ r_item, loggedUserRequests = false }) {
   }
 
   const item = r_item.item
+  const requestedUser = r_item.requestedUser
+  console.log(r_item.owner)
 
   return (
     <div className='item'>
@@ -41,12 +43,19 @@ function RItem({ r_item, loggedUserRequests = false }) {
       </div>
       <div className='about-item'>
 
-        <div className='item-price'>{item.price}</div>
-        <div className='item-title'>{item.title}</div>
+        <div className='item-price'>{item.title}</div>
         <div className='item-details'>{item.description}</div>
-        <div className='item-location'>
+        <div className='item-title'>Requested User: {requestedUser.name}</div>
+        {/* <div className='item-location'>
           {item.neighbourhood} {item.city} {item.state}
-        </div>
+        </div> */}
+        <div className='item-details'>User's Mobile: {requestedUser.mobile}</div>
+        {r_item.isRequestComplete && (
+          r_item.permission && (
+            <div>Owner's Mobile: {r_item.owner.mobile}</div>
+            
+          )
+        )}
         <div className='success-reject-btns'>
           {
             loggedUserRequests ? (

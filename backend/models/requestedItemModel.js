@@ -3,7 +3,7 @@ const mongoose = require("mongoose")
 
 const requestedItemSchema = mongoose.Schema({
     owner: {
-        type: Object // email
+        type: Object
     },
     requestedUser: {
         type: Object

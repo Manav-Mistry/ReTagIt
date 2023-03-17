@@ -54,6 +54,10 @@ function Login() {
     dispatch(login(loginData))
   };
 
+  function redirectToRegister() {
+    navigate("/register")
+  }
+ 
   return (
     <div className='center-div'>
 
@@ -93,7 +97,7 @@ function Login() {
 
               {/* button */}
               <div className="form-group login-btn d-flex justify-content-between">
-                <button className="btn btn-block register-btn-btn" onClick={navigate("/register")}>
+                <button className="btn btn-block register-btn-btn" onClick={redirectToRegister}>
                   Register
                 </button>
                 <button type="submit" className="btn btn-block login-btn-btn">
