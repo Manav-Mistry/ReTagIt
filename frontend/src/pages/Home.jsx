@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { useNavigate } from 'react-router-dom'
 import { reset, logout } from '../features/auth/authSlice'
 import Items from '../components/Items'
-import Carousel from '../components/Carousel'
+// import Carousel from '../components/Carousel'
 
 function Home() {
   // const dispatch = useDispatch()
@@ -22,7 +22,7 @@ function Home() {
 
   return (
     <>
-        <Carousel/>
+//         <Carousel/>
         <Items />
     </>
 
