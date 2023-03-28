@@ -23,6 +23,8 @@ function App() {
 
   const {items, isLoading, isError, isSuccess, itemAdded} = useSelector((state) => state.item)
 
+  const {user} = useSelector((state) => state.auth)
+
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -35,11 +37,11 @@ function App() {
     
   }, []);
 
-  useEffect(() => {
-    // console.log("in app.js")
-    dispatch(getAllItems())
+  // useEffect(() => {
+  //   // console.log("in app.js")
+  //   dispatch(getAllItems())
     
-  }, [itemAdded]);
+  // }, [itemAdded, user]);
 
   return (
     <>

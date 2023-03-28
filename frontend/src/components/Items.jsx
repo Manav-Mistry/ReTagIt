@@ -10,11 +10,12 @@ import "../style/items.css"
 
 function Items() {
     const { items } = useSelector((state) => state.item)
-    const { isError, isLoading, isSuccess, message } = useSelector((state) => state.requestedItem)
+    const { isError, isLoading, isSuccess, message, requestSuccess } = useSelector((state) => state.requestedItem)
 
     const dispatch = new useDispatch()
-  
+
     useEffect( () => {
+      console.log(12345465)
       if(isSuccess) {
         console.log("toast", message)
         toast.success(message, {
@@ -31,9 +32,13 @@ function Items() {
       }
       console.log("--- item ---")
       dispatch(reset())
-    }, [message, isError, isSuccess, dispatch])
+    }, [isError, isLoading, isSuccess, message,requestSuccess])
   
-  const userItems = items.items
+  const [userItems, setUserItems] = useState()
+  
+  useEffect(() => {
+    setUserItems(items)
+  }, [items])
 
   return (
     <div className='items-container'>

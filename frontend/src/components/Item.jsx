@@ -8,12 +8,33 @@ import { toast } from "react-toastify";
 import { reset } from '../features/requestedItem/requestedItemSlice';
 
 function Item({ item, byUser = false }) {
+
   // getting logged user
   const { user } = useSelector((state) => state.auth)
+  const { isError, isLoading, isSuccess, message, requestSuccess } = useSelector((state) => state.requestedItem)
 
   const dispatch = new useDispatch()
 
   // const loggedUser = localStorage.getItem("user");
+  // useEffect( () => {
+  //   console.log(12345465)
+  //   if(isSuccess) {
+  //     console.log("toast", message)
+  //     toast.success(message, {
+  //       position: toast.POSITION.TOP_CENTER,
+  //       theme: "dark",
+  //     })
+  //     // toast.success("")
+  //   } 
+  //   else if(isError) {
+  //     toast.error(message, {
+  //       position: toast.POSITION.TOP_CENTER,
+  //       theme: "dark",
+  //     })
+  //   }
+  //   console.log("--- item ---")
+  //   dispatch(reset())
+  // }, [requestSuccess])
 
   const makeRequest = (item) => {
     if (user == null) {

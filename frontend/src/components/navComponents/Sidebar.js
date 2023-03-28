@@ -101,7 +101,7 @@ const Sidebar = () => {
             })}
             { user && (
               <div className='d-flex align-items-center'>
-                <BiLogOutCircle size={20} style={{"margin-left": "1rem"}}/>
+                <BiLogOutCircle size={20} style={{"marginLeft": "1rem"}}/>
                 <SidebarLink onClick={logoutUser}>Logout</SidebarLink>
               </div>
             )}

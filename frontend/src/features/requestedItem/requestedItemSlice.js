@@ -9,7 +9,8 @@ const initialState = {
     isSuccess: false,
     isLoading: false,
     message: "",
-    item_swaped: false
+    item_swaped: false,
+    requestSuccess: false,
 }
 
 
@@ -125,6 +126,7 @@ const requestedItemSlice = createSlice({
                 state.isLoading = false
                 state.isSuccess = true
                 state.message = action.payload
+                state.requestSuccess = true
             })
             .addCase(addRequestedItem.rejected, (state, action) => {
                 state.isError = true

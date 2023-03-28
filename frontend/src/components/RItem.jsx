@@ -4,18 +4,21 @@ import { BsCheckCircleFill } from 'react-icons/bs';
 import { MdOutlinePending } from 'react-icons/md';
 import { RxCrossCircled } from 'react-icons/rx';
 
+import { deleteItem } from '../features/Items/itemSlice';
+
 import { useSelector, useDispatch } from "react-redux"
 import { acceptRequest, deniedRequest } from "../features/requestedItem/requestedItemSlice"
 
 function RItem({ r_item, loggedUserRequests = false }) {
   const dispatch = useDispatch()
-  console.log(loggedUserRequests)
+  // console.log(loggedUserRequests)
 
   const accept_Request = (r_item_id) => {
-    const r_item = {
+    const r_item_ = {
       "r_item_id": r_item_id
     }
-    dispatch(acceptRequest(r_item))
+    dispatch(acceptRequest(r_item_))
+    dispatch(deleteItem(r_item.item))
   }
 
   const denied_Request = (r_item_id) => {
@@ -27,7 +30,7 @@ function RItem({ r_item, loggedUserRequests = false }) {
 
   const item = r_item.item
   const requestedUser = r_item.requestedUser
-  console.log(r_item.owner)
+  // console.log(r_item.owner)
 
   return (
     <div className='item'>
