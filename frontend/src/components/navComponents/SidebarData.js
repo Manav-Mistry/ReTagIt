@@ -27,7 +27,7 @@ export const SidebarData = [
   },
   {
     title: 'Manage Your Box',
-    path: '/reports',
+    path: '#',
     icon: <IoIcons.IoIosPaper />,
     iconClosed: <RiIcons.RiArrowDownSFill />,
     iconOpened: <RiIcons.RiArrowUpSFill />,
@@ -46,6 +46,11 @@ export const SidebarData = [
         cName: 'sub-nav'
       }
     ]
+  },
+  {
+    title: 'Add Item',
+    path: '/addItem',
+    icon: <IoIcons.IoMdAddCircle />
   },
   {
     title: 'Items',

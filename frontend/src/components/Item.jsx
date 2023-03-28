@@ -80,10 +80,3 @@ function Item({ item, byUser = false }) {
 }
 
 export default Item
-
-//  <div className='item-price'>{item.price}</div>
-//  <div className='item-title'>{item.title}</div>
-// <div className='item-details'>{item.description}</div>
-// <div className='item-location'>
-//     {item.neighbourhood} {item.city} {item.state}
-// </div> 
