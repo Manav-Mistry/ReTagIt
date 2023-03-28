@@ -23,6 +23,10 @@ function Navbar() {
         navigate("/login");
     }
 
+    function viewAllUserItems() {
+        navigate("/viewAllUserItems")
+    }
+
     function viewRequests() {
         console.log(123, user)
         if(user != null) {
@@ -97,7 +101,7 @@ function Navbar() {
     }
 
     return (
-        <nav className="navbar navbar-expand-lg navbar-dark">
+        <nav className="navbar navbar-dark">
             <div className="container-fluid">
 
                 <Link className="navbar-brand" to="/">
@@ -121,6 +125,7 @@ function Navbar() {
                                         <>
                                             {/* Hello {user.name} */}
                                             <div className='nav-link' onClick={logoutUser}>Logout</div>
+                                            <div className="nav-link" onClick={viewAllUserItems}>All Requests</div>
                                         </>
                                     )
                                     : (

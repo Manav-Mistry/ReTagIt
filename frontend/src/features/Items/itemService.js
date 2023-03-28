@@ -7,11 +7,34 @@ const API_URL_IMG = "http://localhost:5000/api/image"
 const getAllItems = async () => {
     // get all items
     // TODO: create backend for get items
-    console.log("above get request")
+    // console.log("above get request")
     const items = await axios.get(`${API_URL}/`);
-    console.log("IN item service", items.data)
+    // console.log("IN item service", items.data)
     return items.data;
    
+}
+
+const deleteItem = async (item) => {
+    const resp = await axios.delete(`${API_URL}/${item._id}`, {
+        headers: {
+            "authorization" : `Bearer ${localStorage.getItem("token")}`
+        }
+    })
+
+    return resp.data
+    // console.log("delete", item)
+}
+
+const getAllUserItems = async () => {
+    // console.log("above get request")
+    const items = await axios.get(`${API_URL}/user`, {
+        headers: {
+            "authorization" : `Bearer ${localStorage.getItem("token")}`
+        }
+    })
+    // console.log("IN item service", items.data)
+    console.log(items.data)
+    return items.data
 }
 
 // TODO: NEW
@@ -44,7 +67,9 @@ const addItem = async (item) => {
 const itemService = {
     getAllItems,
     addItem,
-    addImage
+    addImage,
+    getAllUserItems,
+    deleteItem
 }
 
 export default itemService

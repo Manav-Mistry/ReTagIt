@@ -7,13 +7,28 @@ const initialState = {
     isSuccess: false,
     isLoading: false,
     message: "",
-    itemAdded: false
+    itemAdded: false,   // means change in number of items 
+    userItems: []
 };
 
 export const getAllItems = createAsyncThunk("item/getAllItems", async (_, thunkAPI) => {
     try{
         return await itemService.getAllItems() 
     } catch(error) {
+        const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+})
+
+export const getAllUserItems = createAsyncThunk("item/getAllUserItems", async (_, thunkAPI) => {
+    try {
+        return await itemService.getAllUserItems()
+    } catch (error) {
         const message =
         (error.response &&
           error.response.data &&
@@ -52,6 +67,19 @@ export const addItem = createAsyncThunk("item/addItem", async (item, thunkAPI) =
     }
 })
 
+export const deleteItem = createAsyncThunk("item/deleteItem", async (item, thunkAPI) => {
+    try {
+        return await itemService.deleteItem(item)
+    } catch (error) {
+        const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+})
 
 const itemSlice = createSlice({
     name: "item",
@@ -94,6 +122,36 @@ const itemSlice = createSlice({
 
         })
         .addCase(addItem.rejected, (state, action) => {
+            state.isLoading = false
+            state.isError = true
+            state.message = action.payload
+        })
+        .addCase(getAllUserItems.pending, (state) => {
+            state.isLoading = true
+        })
+        .addCase(getAllUserItems.fulfilled, (state, action) => {
+            state.isLoading = false
+            state.isError = false
+            state.isSuccess = true
+            state.userItems = action.payload
+
+        })
+        .addCase(getAllUserItems.rejected, (state, action) => {
+            state.isLoading = false
+            state.isError = true
+            state.message = action.payload
+        })
+        .addCase(deleteItem.pending, (state) => {
+            state.isLoading = true
+        })
+        .addCase(deleteItem.fulfilled, (state, action) => {
+            state.isLoading = false
+            state.isError = false
+            state.isSuccess = true
+            state.itemAdded = true // means change in number of items
+            state.message = action.payload
+        })
+        .addCase(deleteItem.rejected, (state, action) => {
             state.isLoading = false
             state.isError = true
             state.message = action.payload

@@ -16,6 +16,7 @@ import ViewAllRequests from './pages/ViewAllRequests';
 import ViewAllAcceptedRequests from './pages/ViewAllAcceptedRequests';
 import ViewAllRequestsByUser from './pages/ViewAllRequestsByUser';
 import Navbar from "./components/Navbar"
+import ViewAllItemsByUser from './pages/ViewAllItemsByUser';
 
 function App() {
 
@@ -28,13 +29,13 @@ function App() {
   }, [isSuccess, isError, isLoading, itemAdded])
 
   useEffect(() => {
-    console.log("in app.js")
+    // console.log("in app.js")
     dispatch(getAllItems())
     
   }, []);
 
   useEffect(() => {
-    console.log("in app.js")
+    // console.log("in app.js")
     dispatch(getAllItems())
     
   }, [itemAdded]);
@@ -52,6 +53,7 @@ function App() {
             <Route path='/viewAllRequests' element={<ViewAllRequests /> } ></Route>
             <Route path='/viewAllAcceptedRequests' element={<ViewAllAcceptedRequests /> } ></Route>
             <Route path='/viewAllRequestsByUser' element={<ViewAllRequestsByUser /> } ></Route>
+            <Route path='/viewAllUserItems' element={<ViewAllItemsByUser />} />
         </Routes>
     </Router>
     <ToastContainer />

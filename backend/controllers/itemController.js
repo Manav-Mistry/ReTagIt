@@ -46,7 +46,33 @@ const getItems = asyncHandler( async (req, res) => {
 
 })
 
+
+const getItemsByUser = asyncHandler(async (req, res) => {
+    const itemUser = req.user
+    const items = await Item.find({"user": itemUser.email})
+    // console.log("--- === items ",items)
+
+    if(items) {
+        res.status(200).json({
+            items: items
+        })
+    } else {
+        res.status(400)
+        throw new Error("No Item By You")
+    }
+})
+
+const deleteItem = asyncHandler(async (req, res) => {
+   
+    console.log(req.params.itemId) 
+    const deletedItem = await Item.deleteOne({"_id": req.params.itemId})
+
+    res.status(204).json({message: "deleted successfully"})
+})
+
 module.exports = {
     addItem,
-    getItems
+    getItems,
+    getItemsByUser,
+    deleteItem
 }
