@@ -29,3 +29,7 @@ code {
   background-color: var(--t-primary);
   color: white;
 }
+
+.logo {
+  transform: translate(-30%, 0%);
+}

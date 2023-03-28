@@ -17,6 +17,7 @@ import ViewAllAcceptedRequests from './pages/ViewAllAcceptedRequests';
 import ViewAllRequestsByUser from './pages/ViewAllRequestsByUser';
 import Navbar from "./components/Navbar"
 import ViewAllItemsByUser from './pages/ViewAllItemsByUser';
+import Sidebar from './components/navComponents/Sidebar';
 
 function App() {
 
@@ -42,8 +43,8 @@ function App() {
 
   return (
     <>
-     <Router >   
-        <Navbar />    
+     <Router >
+        <Sidebar />
         <Routes>
             <Route path="/" element={<Home />} />
             <Route path='/viewAllItems' element={<ViewAllItems />} />
