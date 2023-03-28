@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { useNavigate } from 'react-router-dom'
 import { reset, logout } from '../features/auth/authSlice'
 import Items from '../components/Items'
+
 import "../style/home.css"
 import Footer from "../components/Footer"
 
@@ -68,7 +69,7 @@ function Home() {
         </section>
 
         <Footer />
-    </>
+</>
 
   )
 }
