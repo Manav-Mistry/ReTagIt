@@ -12,18 +12,6 @@ export const SidebarData = [
     iconClosed: <RiIcons.RiArrowDownSFill />,
     iconOpened: <RiIcons.RiArrowUpSFill />,
 
-    // subNav: [
-    //   {
-    //     title: 'Users',
-    //     path: '/overview/users',
-    //     icon: <IoIcons.IoIosPaper />
-    //   },
-    //   {
-    //     title: 'Revenue',
-    //     path: '/overview/revenue',
-    //     icon: <IoIcons.IoIosPaper />
-    //   }
-    // ]
   },
   {
     title: 'Manage Your Box',
@@ -55,6 +43,11 @@ export const SidebarData = [
   {
     title: 'Items',
     path: '/viewAllItems',
+    icon: <FaIcons.FaCartPlus />
+  },
+  {
+    title: 'Your Added Items',
+    path: '/viewAllUserItems',
     icon: <FaIcons.FaCartPlus />
   },
   {

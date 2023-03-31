@@ -75,6 +75,7 @@ const Sidebar = () => {
   const showSidebar = () => setSidebar(!sidebar);
 
   function logoutUser() {
+    console.log("logout")
     dispatch(logout())
     dispatch(reset())
     navigate("/")

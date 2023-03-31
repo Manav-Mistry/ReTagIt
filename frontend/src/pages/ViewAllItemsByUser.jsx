@@ -9,10 +9,21 @@ import { toast } from "react-toastify";
 function ViewAllItemsByUser() {
     const { isError, isLoading, isSuccess, message, userItems, itemAdded } = useSelector((state) => state.item)
 
+    const {user} = useSelector((state) => state.auth)
+
     const dispatch = useDispatch()
     
     useEffect(() => {
         dispatch(getAllUserItems())
+    }, [])
+
+    useEffect(() => {
+      if(!user) {
+        toast.error("Please login first to access", {
+          position: toast.POSITION.TOP_CENTER,
+          theme: "dark",
+        })
+      }      
     }, [])
 
     useEffect(() => {

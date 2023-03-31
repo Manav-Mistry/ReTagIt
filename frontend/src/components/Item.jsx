@@ -15,6 +15,10 @@ function Item({ item, byUser = false }) {
 
   const dispatch = new useDispatch()
 
+  useEffect(()=>{
+    console.log('first  child load');
+  },[])
+
   // const loggedUser = localStorage.getItem("user");
   // useEffect( () => {
   //   console.log(12345465)
@@ -80,7 +84,9 @@ function Item({ item, byUser = false }) {
 
         <div className='item-price'>{item.title}</div>
         {/* <div className='item-title'>{item.title}</div> */}
-        <div className='item-details'>{item.description}</div>
+        <div className='item-details' style={{"whiteSpace": "nowrap",
+        "overflow": "hidden",
+        "textOverflow": "ellipsis"}} data-bs-toggle="tooltip" data-bs-placement="bottom" title={`${item.description}`}>{item.description}</div>
         <div className='item-location'>
           {item.neighbourhood} {item.city} {item.state}
         </div>

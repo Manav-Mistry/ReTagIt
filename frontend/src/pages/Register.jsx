@@ -116,6 +116,7 @@ function Register() {
               onChange={onChange}
               placeholder="Enter your mobile number"
             />
+            <small id="emailHelp" class="form-text text-muted m-3">Your Mobile Number</small>
 
             {/* password */}
             <input

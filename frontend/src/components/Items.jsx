@@ -12,7 +12,7 @@ function Items() {
     const { items } = useSelector((state) => state.item)
     const { isError, isLoading, isSuccess, message, requestSuccess } = useSelector((state) => state.requestedItem)
 
-    const dispatch = new useDispatch()
+    const dispatch = new useDispatch();
 
     useEffect( () => {
       console.log(12345465)
@@ -32,9 +32,9 @@ function Items() {
       }
       console.log("--- item ---")
       dispatch(reset())
-    }, [isError, isLoading, isSuccess, message,requestSuccess])
+    }, [isError, isLoading, isSuccess, message, requestSuccess])
   
-  const [userItems, setUserItems] = useState()
+  const [userItems, setUserItems] = useState();
   
   useEffect(() => {
     setUserItems(items)

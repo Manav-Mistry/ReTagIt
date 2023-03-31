@@ -21,6 +21,17 @@ function AddItem() {
   // useselector
   const {isError, isLoading, isSuccess, message} = useSelector( (state) => state.item )
 
+  const {user} = useSelector((state) => state.auth)
+
+  useEffect(() => {
+    if(!user) {
+      toast.error("Please login first to access", {
+        position: toast.POSITION.TOP_CENTER,
+        theme: "dark",
+      })
+    }      
+  }, [])
+
   
   useEffect(() => {
     if(isError) {
@@ -98,70 +109,74 @@ function AddItem() {
   };
   return (
     <div className="container">
-
-      <div className="form">
-        <div className="form-group">
-          <form onSubmit={onSubmit} encType="multipart/form-data">
-            {/* title */}
-            <input
-              type="text"
-              className="form-control"
-              id="title"
-              name="title"
-              value={title}
-              onChange={onChange}
-              placeholder="Enter item title"
-            />
-
-            {/* description */}
-            <textarea id="w3review" name="description" rows="4" cols="50" onChange={onChange} className="form-control" placeholder="Description">
-                
-            </textarea>
-
-            {/* state */}
-            <input
-              type="text"
-              className="form-control"
-              id="state"
-              name="state"
-              value={state}
-              onChange={onChange}
-              placeholder="state"
-            />
-
-            {/* city */}
-            <input
-              type="text"
-              className="form-control"
-              id="city"
-              name="city"
-              value={city}
-              onChange={onChange}
-              placeholder="city"
-            />
-
-            {/* neighbourhood */}
-            <input
-              type="text"
-              className="form-control"
-              id="neighbourhood"
-              name="neighbourhood"
-              value={neighbourhood}
-              onChange={onChange}
-              placeholder="neighbourhood"
-            />
-            {/* item-image */}
-            <input type="file" id="file" name="file" onChange={(e) => setSelectedFile(e.target.files[0])}/>
-
-            {/* button */}
+      {
+        (user &&  <>
+          <div className="form">
             <div className="form-group">
-              <button type="submit" className="btn btn-block addItem-btn">
-                Submit
-              </button>
+              <form onSubmit={onSubmit} encType="multipart/form-data">
+                {/* title */}
+                <input
+                  type="text"
+                  className="form-control"
+                  id="title"
+                  name="title"
+                  value={title}
+                  onChange={onChange}
+                  placeholder="Enter item title"
+                />
+
+                {/* description */}
+                <textarea id="w3review" name="description" rows="4" cols="50" onChange={onChange} className="form-control" placeholder="Description">
+                    
+                </textarea>
+
+                {/* state */}
+                <input
+                  type="text"
+                  className="form-control"
+                  id="state"
+                  name="state"
+                  value={state}
+                  onChange={onChange}
+                  placeholder="state"
+                />
+
+                {/* city */}
+                <input
+                  type="text"
+                  className="form-control"
+                  id="city"
+                  name="city"
+                  value={city}
+                  onChange={onChange}
+                  placeholder="city"
+                />
+
+                {/* neighbourhood */}
+                <input
+                  type="text"
+                  className="form-control"
+                  id="neighbourhood"
+                  name="neighbourhood"
+                  value={neighbourhood}
+                  onChange={onChange}
+                  placeholder="neighbourhood"
+                />
+                {/* item-image */}
+                <input type="file" id="file" name="file" onChange={(e) => setSelectedFile(e.target.files[0])}/>
+
+                {/* button */}
+                <div className="form-group">
+                  <button type="submit" className="btn btn-block addItem-btn">
+                    Submit
+                  </button>
+                </div>
+              </form>
             </div>
-          </form>
-        </div>
-      </div>
+          </div>
+        
+        </>)
+      }
     </div>
   );
 }
