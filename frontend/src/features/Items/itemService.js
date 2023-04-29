@@ -1,7 +1,7 @@
 import axios from "axios"
 
-const API_URL = "http://localhost:5000/api/item"
-const API_URL_IMG = "http://localhost:5000/api/image"
+const API_URL = `${process.env.REACT_APP_API_URL}/api/item`
+const API_URL_IMG = `${process.env.REACT_APP_API_URL_IMG}`
 
 
 const getAllItems = async () => {

@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const API_URL = "http://localhost:5000/api/requestedItem"
+const API_URL = `${process.env.REACT_APP_API_URL}/api/requestedItem`
 
 const addRequestedItem = async (r_item_user) => {
     console.log("In Service",r_item_user)
