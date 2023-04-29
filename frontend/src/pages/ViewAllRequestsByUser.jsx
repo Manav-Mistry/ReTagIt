@@ -6,10 +6,14 @@ import { useSelector } from 'react-redux'
 import RItems from '../components/RItems'
 import {FaFilter} from "react-icons/fa"
 import "../style/viewItems.css"
+import { toast } from "react-toastify";
+
 
 function ViewAllRequestsByUser() {
 
   const { r_items_all, isLoading, isSuccess, isError, message } = useSelector((state) => state.requestedItem)
+  const {user} = useSelector((state) => state.auth)
+
   const dispatch = useDispatch()
   const [r_items_filtered, set_r_items_filtered] = useState([]);
   // let filtered_items;
@@ -32,6 +36,15 @@ function ViewAllRequestsByUser() {
   useEffect(() => {
     dispatch(reset())
   }, [isSuccess, isError, message, dispatch])
+
+  useEffect(() => {
+    if(!user) {
+      toast.error("Please login first to access", {
+        position: toast.POSITION.TOP_CENTER,
+        theme: "dark",
+      })
+    }      
+  }, [])
 
   
   return (

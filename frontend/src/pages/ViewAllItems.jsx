@@ -17,7 +17,8 @@ function ViewAllItems() {
 
     const [userItems, setUserItem] = useState([])
     const [exceptUserItems, setExceptUserItems] = useState([])
-
+    const {user} = useSelector((state) => state.auth)
+    
     useEffect(() => {
       setUserItem(items.items)
     }, [items])
@@ -55,7 +56,6 @@ function ViewAllItems() {
       }
     }, [userItems])
 
-    const {user} = useSelector((state) => state.auth)
 
     useEffect(() => {
       if(!user) {

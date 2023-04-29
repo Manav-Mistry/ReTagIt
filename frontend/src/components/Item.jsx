@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import Currency from 'react-currency-icons'
+// import Currency from 'react-currency-icons'
 import "../style/item.css"
 import { useSelector, useDispatch } from "react-redux";
 import { addRequestedItem } from "../features/requestedItem/requestedItemSlice"

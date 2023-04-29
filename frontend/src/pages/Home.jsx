@@ -9,7 +9,7 @@ import Footer from "../components/Footer"
 
 function Home() {
   // const dispatch = useDispatch()
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
 
   // const {user} = useSelector((state) => state.auth)
 
@@ -21,6 +21,14 @@ function Home() {
   // function loginUser() {
   //   navigate("/login")
   // }
+
+  function viewItems() {
+    navigate("/viewAllItems")
+  }
+
+  function sellItem() {
+    navigate("/addItem")
+  }
 
   return (
     <>
@@ -73,16 +81,16 @@ function Home() {
     <center>
     <div style={{zIndex: 2, width: "50%", margin:"25px" ,  justifyContent:"center", alignItems:"center"}}>
     <div>
-    <img src='./img/free2.jpg' style={{height: "100px"}}/>
+    {/* <img src='./img/free2.jpg' style={{height: "100px"}}/> */}
     </div>
       <div style={{margin: "10px"}}><h1 style={{color:"red", fontFamily:"fantasy"}}>Lets ReTagIt!</h1>
       <h5 style={{fontFamily: "-moz-initial"}}>Find something useful,<br/> donate something not in use,<br/> and join a community doing good.</h5>
       </div>
     </div>
-    <button className="btn btn-block login-btn-btn" style={{margin: "10px"}}>
+    <button className="btn btn-block login-btn-btn" style={{margin: "10px"}} onClick={() => viewItems()} >
       View Products
       </button>
-      <button className="btn btn-block login-btn-btn" style={{margin: "10px"}}>
+      <button className="btn btn-block login-btn-btn" style={{margin: "10px"}} onClick={() => sellItem()}>
       Start Selling!
       </button>
       <hr style={{width: "200px"}}/>

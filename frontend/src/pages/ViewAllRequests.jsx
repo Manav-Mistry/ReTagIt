@@ -5,10 +5,11 @@ import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import RItems from '../components/RItems'
 
+import { toast } from "react-toastify";
 
 function ViewAllRequests() {
   const {r_items, isLoading, isError, isSuccess, message, item_swaped} = useSelector((state) => state.requestedItem)
-
+  const {user} = useSelector((state) => state.auth)
 
   const dispatch = useDispatch()
   useEffect(() => {
@@ -23,6 +24,15 @@ function ViewAllRequests() {
   useEffect(() => {
     dispatch(reset())
   }, [isError, isSuccess, message,item_swaped, dispatch])
+
+  useEffect(() => {
+    if(!user) {
+      toast.error("Please login first to access", {
+        position: toast.POSITION.TOP_CENTER,
+        theme: "dark",
+      })
+    }      
+  }, [])
 
   return (
     <>
