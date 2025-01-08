@@ -98,7 +98,7 @@ function Home() {
       <br/>  
       <h5>About us</h5>
       <h6><b>ReTagIt</b> is a Free Store where various clothing and household goods are available to the community at no charge. <br/>This service helps families stay afloat financially. They can use their income to pay for shelter, food and transportation while “shopping” for free clothing, shoes, bed linens, dishes, cookware, toys—even beds, couches, and refrigerators.<br/> 
-      The Free Store also provides an opportunity for folks in Central Texas to get involved in a helping way.<br/> “Re-use and Recycle” is becoming the mantra of the decade as people strive to take care of their environment and limit the volume of trash added weekly to area landfills. One man’s trash is another man’s treasure! Items that are re-usable can be put back into circulation.
+      <br/> “Re-use and Recycle” is becoming the mantra of the decade as people strive to take care of their environment and limit the volume of trash added weekly to area landfills. One man’s trash is another man’s treasure! Items that are re-usable can be put back into circulation.
       <br/><br/>
       Who is eligible?
       <br/>

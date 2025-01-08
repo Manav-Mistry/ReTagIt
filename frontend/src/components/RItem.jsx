@@ -47,7 +47,9 @@ function RItem({ r_item, loggedUserRequests = false }) {
       <div className='about-item'>
 
         <div className='item-price'>{item.title}</div>
-        <div className='item-details'>{item.description}</div>
+        <div className='item-details' style={{"whiteSpace": "nowrap",
+        "overflow": "hidden",
+        "textOverflow": "ellipsis"}} >{item.description}</div>
         <div className='item-title'>Requested User: {requestedUser.name}</div>
         {/* <div className='item-location'>
           {item.neighbourhood} {item.city} {item.state}
